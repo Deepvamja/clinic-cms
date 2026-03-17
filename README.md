@@ -1,73 +1,156 @@
-# React + TypeScript + Vite
+# 🏥 Clinic Queue Management System (CMS)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack, multi-tenant clinic management system built using modern web technologies.
+This project implements role-based workflows for Admin, Patient, Doctor, and Receptionist using a real production API.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Live API
 
-## React Compiler
+Base URL:
+https://cmsback.sampaarsh.cloud
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🔐 Demo Credentials
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```txt
+Email: enrollment@darshan.ac.in
+Password: password123
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 📌 Features
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 👨‍💼 Admin
+
+* View clinic details (name, code, stats)
+* Manage users (Doctor, Patient, Receptionist)
+* Create new users with role-based access
+
+---
+
+### 👤 Patient
+
+* Book appointments (future dates only)
+* View appointment history with queue token & status
+* View prescriptions and medical reports
+
+---
+
+### 🧑‍⚕️ Doctor
+
+* View today’s patient queue
+* Add prescription (medicines, dosage, duration, notes)
+* Add medical reports (diagnosis, tests, remarks)
+
+---
+
+### 🧑‍💼 Receptionist
+
+* View daily queue by date
+* Update queue status:
+
+  * waiting → in-progress / skipped
+  * in-progress → done
+
+---
+
+## 🧠 Key Concepts
+
+* Multi-tenant system (data scoped by clinicId)
+* Role-based access control (RBAC)
+* Queue management using token system
+* Appointment lifecycle tracking
+* Strict API rule enforcement
+
+---
+
+## ⚙️ Tech Stack
+
+* Frontend: React.js (Vite)
+* Styling: Tailwind CSS
+* State: React Hooks
+* Routing: React Router
+* API Handling: Axios
+* Notifications: react-hot-toast
+
+---
+
+## 📂 Project Structure
+
+```bash
+src/
+│── api/               # API services (axios + endpoints)
+│── components/        # Reusable UI components
+│── layouts/           # Dashboard layout
+│── pages/
+│   ├── admin/
+│   ├── doctor/
+│   ├── patient/
+│   └── receptionist/
+│── utils/             # Auth utilities
+│── App.tsx
+│── main.tsx
 ```
+
+---
+
+## 🔄 Workflow
+
+1. Admin creates users
+2. Patient books appointment
+3. Receptionist manages queue
+4. Doctor adds prescription/report
+5. Patient views results
+
+---
+
+## 📡 API Coverage
+
+All required endpoints are implemented:
+
+* Auth → `/auth/login`
+* Admin → `/admin/clinic`, `/admin/users`
+* Appointments → `/appointments`, `/appointments/my`, `/appointments/:id`
+* Queue → `/queue`, `/queue/:id`
+* Doctor → `/doctor/queue`
+* Prescriptions → `/prescriptions`
+* Reports → `/reports`
+
+---
+
+## ✅ Validations & Rules Implemented
+
+* No past date booking
+* Unique time slot per clinic per date
+* Strict queue status transitions
+* Prescription/report allowed only for valid appointment status
+* Role-based route protection
+
+---
+
+## 🛠 Installation
+
+```bash
+git clone https://github.com/your-username/clinic-cms.git
+cd clinic-cms
+npm install
+npm run dev
+```
+
+---
+
+## 🔐 Authentication Flow
+
+* Login returns JWT token
+* Token stored in localStorage
+* Axios interceptor attaches token automatically
+* Auto logout on invalid/expired token
+
+
+
+
+
+---
